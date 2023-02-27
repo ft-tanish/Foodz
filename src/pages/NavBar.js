@@ -1,28 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import LogoImg from "../assests/images/logo.png";
 
 const NavBar = () => {
 
-  const menuList = [
-    { name: 'Home', 'id': 1 },
-    { name: 'About', 'id': 1 },
-    { name: 'Contact', 'id': 1 },
-    { name: 'Cart', 'id': 1 },
-  ]
-
-  const menuHTML = menuList.map(({ name, id }) => <li key={id}>{name}</li>)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="header">
       <div className="logo">
-        <img src={LogoImg} alt='Foodz' />
+        <Link to="/">
+          <img src={LogoImg} alt='Foodz' />
+        </Link>
       </div>
       <div className="nav-items">
         <ul>
-          {menuHTML}
+          <li>
+            <Link to="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact">
+              Contact
+            </Link>
+          </li>
+          <li>Cart</li>
         </ul>
       </div>
-    </div>
+      <div>
+        {isLoggedIn ? <button onClick={() => setIsLoggedIn(false)}> Logout</button>
+          : <button onClick={() => setIsLoggedIn(true)}>Login</button>}
+      </div>
+    </div >
   )
 }
 
