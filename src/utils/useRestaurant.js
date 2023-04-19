@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { FETCH_MENU_URL } from '../constants';
 
-const useRestaurant = () => {
+const useRestaurant = (id) => {
 
     const [restaurant, setRestaurant] = useState();
 
     useEffect(() => {
         getRestaurantInfo();
-    }, [])
+    }, []);
 
-    const getRestaurantInfo = async (id) => {
-        const data = await fetch(
-            "https://www.swiggy.com/dapi/menu/v4/full?lat=12.9204334&lng=77.63571390000001&menuId=" + id
-        );
+    const getRestaurantInfo = async () => {
+        const data = await fetch(FETCH_MENU_URL + id);
         const json = await data?.json();
-        setRestaurant(json?.data)
+        setRestaurant(json?.data);
     }
 
     return restaurant;
+
 }
 
-export default useRestaurant
+export default useRestaurant;

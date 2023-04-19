@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { RestrauntCard } from './RestrauntCard';
 import Shimmer from './Shimmer';
 import { filterData } from '../utils/helper';
+import useOnline from '../utils/useOnline';
 
 
 const Body = () => {
@@ -29,23 +30,28 @@ const Body = () => {
         getRestaurants();
     }, [])
 
+    const Online = useOnline();
+
+    if (!Online) {
+        return <h2>Oops your Internet Connection seems lost!</h2>
+    }
+
     if (!allRestaurants) return null;
 
     return allRestaurants?.length === 0 ? <Shimmer /> : (
         <>
-            <div className='search-cointainer'>
+            <div className='search-cointainer p-5 bg-orange-300 my-5'>
                 <input type="text"
-                    className='search-input'
+                    className='p-1 m-1 rounded-md focus:bg-amber-100'
                     placeholder='search'
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)} />
                 <button
-                    className='search-btn'
+                    className='p-2 m-2 bg-black hover:bg-amber-900 text-white rounded-md'
                     onClick={handleSearch}
                 >Search</button>
             </div>
-
-            <div className='restraunt-list'>
+            <div className='flex flex-wrap'>
                 {filteredRestaurants?.length === 0 ? <h3>No such restaurant with this name</h3> :
                     filteredRestaurants?.map((restaurant) => {
                         return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { IMG_CDN_URL } from '../constants';
 import useRestaurant from '../utils/useRestaurant';
@@ -20,6 +20,9 @@ export const RestrauntMenu = () => {
                 <h3>{restaurant?.city}</h3>
                 <h3>{restaurant?.avgRating} rating</h3>
                 <h3>{restaurant?.costForTwoMsg}</h3>
+            </div>
+            <div>
+                <button className='p-2 m-5 bg-orange-900'>Add Item</button>
             </div>
             <div>
                 <h1>Menu</h1>
